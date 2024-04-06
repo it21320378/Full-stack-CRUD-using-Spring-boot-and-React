@@ -10,18 +10,45 @@ export default function AddUser() {
       name:"",
       username:"",
       email:""
-  })
+  });
+
+  const [errors, setErrors] = useState({}); {/*===*/}
 
   const{name, username, email}= user;
 
   const onInputChange=(e)=>{
     setUser({...user, [e.target.name]:e.target.value});
-  }
+  };
+
+  const validateForm = (e) => {  {/*===start*/}
+      let isValid = true;
+      const errors={};
+
+      if(!name.match(/^[a-zA-Z\s]+$/)){
+          errors.name="Name can contain only letters.";
+          isValid=false;
+      }
+
+      if(!username.trim()){
+          errors.username="Username is required.";
+          isValid=false;
+      }
+
+      if(!email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)){
+          errors.email="Invalid email format.";
+          isValid=false;
+      }
+
+      setErrors(errors);
+      return isValid;
+  }; {/*===end*/}
 
   const onSubmit= async (e)=>{
     e.preventDefault();
-    await axios.post("http://localhost:8072/user", user);
-    navigate("/");
+    if(validateForm()){   {/*===*/}
+      await axios.post("http://localhost:8072/user", user);  {/*===*/}
+      navigate("/");
+    }  {/*===*/}
   }
 
   return (
@@ -34,23 +61,23 @@ export default function AddUser() {
             <div className='mb-3'>
               <label htmlFor="Name" className="form-label">Name</label>
               <input type="text" className="form-control" 
-              placeholder="Enter your name" name="name" 
-              value={name} onChange={(e)=>onInputChange(e)}/>
-
+              placeholder="Enter your name" name="name"
+              value={name} onChange={(e)=>onInputChange(e)} required/> {/*===*/}
+{errors.name && <div className="text-danger">{errors.name}</div>} {/*===*/}
             </div>
             <div className='mb-3'>
               <label htmlFor="Username" className="form-label">Username</label>
               <input type="text" className="form-control" 
               placeholder="Enter your username" name="username" 
-              value={username} onChange={(e)=>onInputChange(e)}/>
-              
+              value={username} onChange={(e)=>onInputChange(e)} required/> {/*===*/}
+{errors.username && <div className="text-danger">{errors.username}</div>} {/*===*/}              
             </div>
             <div className='mb-3'>
               <label htmlFor="Email" className="form-label">E-mail</label>
               <input type="text" className="form-control" 
               placeholder="Enter your e-mail address" name="email" 
-              value={email} onChange={(e)=>onInputChange(e)}/>
-              
+              value={email} onChange={(e)=>onInputChange(e)} required/> {/*===*/}
+{errors.email && <div className="text-danger">{errors.email}</div>} {/*===*/}              
             </div>
             <button type="submit" className='btn btn-outline-primary'>
               Submit

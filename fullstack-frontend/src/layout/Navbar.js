@@ -6,7 +6,7 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <Link to="/"><a className="navbar-brand" href="#">
+          <Link to="/" style={{textDecoration: 'none'}}><a className="navbar-brand">
             Full Stack Application
           </a></Link>
           <button

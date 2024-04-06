@@ -46,21 +46,21 @@ export default function EditUser() {
               <label htmlFor="Name" className="form-label">Name</label>
               <input type="text" className="form-control" 
               placeholder="Enter your name" name="name" 
-              value={name} onChange={(e)=>onInputChange(e)}/>
+              value={name} onChange={(e)=>onInputChange(e)} required/> {/*===*/}
 
             </div>
             <div className='mb-3'>
               <label htmlFor="Username" className="form-label">Username</label>
               <input type="text" className="form-control" 
               placeholder="Enter your username" name="username" 
-              value={username} onChange={(e)=>onInputChange(e)}/>
+              value={username} onChange={(e)=>onInputChange(e)} required/> {/*===*/}
               
             </div>
             <div className='mb-3'>
               <label htmlFor="Email" className="form-label">E-mail</label>
               <input type="text" className="form-control" 
               placeholder="Enter your e-mail address" name="email" 
-              value={email} onChange={(e)=>onInputChange(e)}/>
+              value={email} onChange={(e)=>onInputChange(e)} required/> {/*===*/}
               
             </div>
             <button type="submit" className='btn btn-outline-primary'>
